@@ -144,7 +144,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 <!-- NAV -->
 <nav>
   <div class="nav-logo">TRION</div>
-  <a href="#pricing" class="nav-btn">Get early access — $28</a>
+  <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="nav-btn" data-polar-checkout data-polar-checkout-theme="dark">Get early access — $28</a>
 </nav>
 
 <!-- Particles -->
@@ -173,7 +173,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
   </p>
 
   <div class="ctas">
-    <a href="#pricing" class="btn-main">Claim your spot — $28/year</a>
+    <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="btn-main" data-polar-checkout data-polar-checkout-theme="dark">Claim your spot — $28/year</a>
     <a href="#problem" class="btn-ghost">See why it exists ↓</a>
   </div>
 
@@ -216,7 +216,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
     <div class="prob-card">
       <div class="prob-ico">💸</div>
       <h3>AI tools cost a fortune</h3>
-      <p>Salesforce: $1,500/mo. HubSpot: $800/mo. Built for corporations with IT teams — not for you. Trion costs $15. For a year.</p>
+      <p>Salesforce: $1,500/mo. HubSpot: $800/mo. Built for corporations with IT teams — not for you. Trion costs $28. For a year.</p>
     </div>
     <div class="prob-card">
       <div class="prob-ico">🧩</div>
@@ -251,9 +251,8 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       <div class="feat"><div class="chk">✓</div>Priority access to every future feature</div>
     </div>
 
-    <!-- REPLACE THIS HREF WITH YOUR LEMON SQUEEZY CHECKOUT URL -->
-    <a href="YOUR_LEMON_SQUEEZY_URL_HERE" class="cta-big">Become a founding member →</a>
-    <p class="guarantee">30-day money back · No questions asked · Secure via Lemon Squeezy</p>
+    <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="cta-big" data-polar-checkout data-polar-checkout-theme="dark">Become a founding member →</a>
+    <p class="guarantee">30-day money back · No questions asked · Secure via Polar</p>
   </div>
 </div>
 
@@ -281,7 +280,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
         We built it because we watched brilliant people — entrepreneurs, freelancers, creators — spend their best hours on work that should never touch human hands. Finding clients. Writing outreach. Building strategy from scratch. Every. Single. Day.<br><br>
         There is a version of the future where an AI handles all of that. Where your time is spent only on the work that actually needs you.<br><br>
         We're building that version. Right now. In public. One day at a time.<br><br>
-        $15 is not a price. It's a founding stake in something the world hasn't seen yet. And you'll be able to say you were there before anyone else knew it existed."
+        $28 is not a price. It's a founding stake in something the world hasn't seen yet. And you'll be able to say you were there before anyone else knew it existed."
       </blockquote>
       <div class="founder-sig">
         Mohammad Muqtadir &amp; Purab Reddy
@@ -349,7 +348,21 @@ async function submitWL(){
   const country = document.getElementById('wl-country').value.trim();
   if(!name || !email){ alert('Please enter your name and email.'); return; }
   try {
-    await fetch('YOUR_APPS_SCRIPT_URL', {
+    await fetch('https://script.google.com/macros/s/AKfycbx-nr3zdwovQz61HffNCM6CxW2ZmzovwGJpV2UaWwGC-JmEFjkzmqo5UStcFCsHdCT4/exec', {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Co
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, country })
+    });
+    document.getElementById('wl-msg').style.display = 'block';
+    document.getElementById('wl-name').value = '';
+    document.getElementById('wl-email').value = '';
+    document.getElementById('wl-country').value = '';
+  } catch(e) {
+    alert('Something went wrong. Please try again.');
+  }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
+</body>
+</html>

@@ -5,35 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Refund Policy — Trion</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Space Grotesk',sans-serif;background:#06060a;color:#d0d0e8;line-height:1.8;padding:0}
-nav{padding:1.25rem 2rem;border-bottom:0.5px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center}
-.nav-logo{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,#c4beff,#7F77DD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
-.nav-back{font-size:.85rem;color:#6060a0;text-decoration:none;transition:color .2s}
-.nav-back:hover{color:#a89ef8}
-.wrap{max-width:760px;margin:0 auto;padding:4rem 2rem 6rem}
-.doc-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#7F77DD;font-weight:500;margin-bottom:.75rem}
-h1{font-size:2.2rem;font-weight:700;letter-spacing:-.03em;color:#f0f0f8;margin-bottom:.5rem}
-.updated{font-size:.85rem;color:#404068;margin-bottom:3rem}
-h2{font-size:1.1rem;font-weight:600;color:#f0f0f8;margin:2.5rem 0 .75rem;padding-bottom:.5rem;border-bottom:0.5px solid rgba(255,255,255,0.07)}
-p{font-size:.95rem;color:#8080a8;margin-bottom:1rem}
-ul{margin:.5rem 0 1rem 1.25rem}
-li{font-size:.95rem;color:#8080a8;margin-bottom:.4rem}
-.guarantee-box{background:linear-gradient(135deg,rgba(99,153,34,0.08),rgba(99,153,34,0.03));border:0.5px solid rgba(99,153,34,0.2);border-radius:16px;padding:2rem;text-align:center;margin:2rem 0}
-.guarantee-box .days{font-size:4rem;font-weight:700;color:#7cb83a;line-height:1}
-.guarantee-box .label{font-size:.85rem;color:#639922;margin-top:.25rem;font-weight:500}
-.guarantee-box p{font-size:.9rem;color:#8080a8;margin-top:1rem;margin-bottom:0}
-.steps{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0}
-.step{display:flex;gap:1rem;align-items:flex-start}
-.step-num{width:28px;height:28px;border-radius:50%;background:rgba(127,119,221,0.1);border:0.5px solid rgba(127,119,221,0.25);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;color:#a89ef8;flex-shrink:0;margin-top:.1rem}
-.step-text h4{font-size:.95rem;font-weight:500;color:#d0d0e8;margin-bottom:.2rem}
-.step-text p{font-size:.875rem;color:#8080a8;margin:0}
-footer-legal{display:block;text-align:center;padding:2rem;border-top:0.5px solid rgba(255,255,255,0.07);font-size:.8rem;color:#404068}
-a.contact-link{color:#7F77DD;text-decoration:none}
-a.contact-link:hover{text-decoration:underline}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:#06060a;
+  color:#d0d0e8;
+  line-height:1.8;
+}
+
+nav{
+  padding:1.25rem 2rem;
+  border-bottom:0.5px solid rgba(255,255,255,0.07);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nav-logo{
+  font-size:1.1rem;
+  font-weight:700;
+  background:linear-gradient(135deg,#c4beff,#7F77DD);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-decoration:none;
+}
+
+.nav-back{
+  font-size:.85rem;
+  color:#6060a0;
+  text-decoration:none;
+}
+
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding:4rem 2rem 6rem;
+}
+
+.doc-label{
+  font-size:.7rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#7F77DD;
+  margin-bottom:.75rem;
+}
+
+h1{
+  font-size:2.2rem;
+  font-weight:700;
+  color:#f0f0f8;
+  margin-bottom:.5rem;
+}
+
+.updated{
+  font-size:.85rem;
+  color:#404068;
+  margin-bottom:2.5rem;
+}
+
+h2{
+  font-size:1.1rem;
+  font-weight:600;
+  color:#f0f0f8;
+  margin:2rem 0 .75rem;
+  border-bottom:0.5px solid rgba(255,255,255,0.07);
+  padding-bottom:.4rem;
+}
+
+p{
+  font-size:.95rem;
+  color:#8080a8;
+  margin-bottom:1rem;
+}
+
+.highlight-box{
+  background:rgba(127,119,221,0.08);
+  border:0.5px solid rgba(127,119,221,0.2);
+  border-radius:14px;
+  padding:1.5rem;
+  margin:1.5rem 0;
+}
+
+.contact{
+  margin-top:2rem;
+}
+
+a{
+  color:#7F77DD;
+  text-decoration:none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+footer{
+  text-align:center;
+  padding:2rem;
+  border-top:0.5px solid rgba(255,255,255,0.07);
+  font-size:.8rem;
+  color:#404068;
+}
 </style>
 </head>
+
 <body>
 
 <nav>
@@ -42,63 +120,60 @@ a.contact-link:hover{text-decoration:underline}
 </nav>
 
 <div class="wrap">
+
   <div class="doc-label">Legal</div>
   <h1>Refund Policy</h1>
-  <p class="updated">Last updated: April 15, 2026</p>
+  <p class="updated">Last updated: April 2026</p>
 
-  <div class="guarantee-box">
-    <div class="days">30</div>
-    <div class="label">Day Money-Back Guarantee</div>
-    <p>We stand behind what we're building. If you're not satisfied within 30 days of purchase, we'll refund you in full. No questions asked.</p>
+  <div class="highlight-box">
+    <p><strong>TRION is currently in pre-launch.</strong></p>
+    <p>Your purchase secures founding member access at an early stage.</p>
   </div>
 
-  <h2>How to Request a Refund</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">
-        <h4>Email us</h4>
-        <p>Send a refund request to <a href="mailto:hello@trytrion.com" class="contact-link">hello@trytrion.com</a> with the subject line "Refund Request" and your purchase email address.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">
-        <h4>We confirm within 24 hours</h4>
-        <p>We'll confirm your request by email and initiate the refund through Lemon Squeezy.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">
-        <h4>Refund processed in 5–10 business days</h4>
-        <p>The refund will appear on your original payment method within 5–10 business days depending on your bank or card provider.</p>
-      </div>
-    </div>
-  </div>
+  <h2>Refund Eligibility</h2>
 
-  <h2>Eligibility</h2>
+  <p>
+    Refunds are only available if TRION is not launched within a reasonable timeframe.
+  </p>
+
+  <p>
+    Once the platform is launched and access is granted, all purchases are non-refundable.
+  </p>
+
+  <h2>Pre-Launch Agreement</h2>
+
+  <p>
+    By purchasing TRION founding access, you acknowledge that:
+  </p>
+
   <ul>
-    <li>Refund must be requested within 30 days of purchase</li>
-    <li>Applies to first-time purchases of the $28 founding member access</li>
-    <li>One refund per customer</li>
-    <li>Your access to the platform will be revoked upon refund</li>
+    <li>The product is currently in development</li>
+    <li>You are purchasing early access at a discounted price</li>
+    <li>Features and timelines may evolve before launch</li>
   </ul>
 
-  <h2>Pre-Launch Context</h2>
-  <p>Trion is currently in pre-launch. Your $28 secures founding member access at a locked price. The full platform will be delivered upon public launch. If we are unable to deliver the platform within a reasonable timeframe, all founding members will receive a full refund automatically — no request needed.</p>
+  <h2>Abuse & Fair Use</h2>
 
-  <h2>Exceptions</h2>
-  <p>We reserve the right to decline refund requests if there is clear evidence of abuse — for example, purchasing access, downloading all available resources, and immediately requesting a refund repeatedly.</p>
+  <p>
+    We reserve the right to deny refund requests in cases of abuse, including repeated purchases and refund attempts.
+  </p>
 
-  <h2>EU &amp; Australian Consumers</h2>
-  <p>If you are located in the European Union, you may have additional statutory cancellation rights under the EU Consumer Rights Directive. If you are in Australia, your rights under the Australian Consumer Law apply in addition to this policy and cannot be excluded. In either case, your rights are at least as strong as our 30-day guarantee above.</p>
+  <h2>Legal Rights</h2>
 
-  <h2>Questions?</h2>
-  <p>Contact us at <a href="mailto:hello@trytrion.com" class="contact-link">hello@trytrion.com</a> — we reply within 24 hours.</p>
+  <p>
+    If you are located in the European Union, Australia, or other regions with consumer protection laws, your statutory rights remain unaffected by this policy.
+  </p>
+
+  <div class="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:noreply@trytrion.com">noreply@trytrion.com</a></p>
+  </div>
+
 </div>
 
-<footer-legal>© 2026 Trion. All rights reserved. · <a href="/" style="color:#7F77DD;text-decoration:none">trytrion.com</a></footer-legal>
+<footer>
+  © 2026 Trion. All rights reserved. · trytrion.com
+</footer>
 
 </body>
 </html>

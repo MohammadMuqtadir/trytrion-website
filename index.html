@@ -144,7 +144,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 <!-- NAV -->
 <nav>
   <div class="nav-logo">TRION</div>
-  <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="nav-btn" data-polar-checkout data-polar-checkout-theme="dark">Get early access — $28</a>
+  <a href="#" onclick="openRazorpay(event)" class="nav-btn">Get early access — <span id="nav-price">$28</span></a>
 </nav>
 
 <!-- Particles -->
@@ -173,7 +173,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
   </p>
 
   <div class="ctas">
-    <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="btn-main" data-polar-checkout data-polar-checkout-theme="dark">Claim your spot — $28/year</a>
+    <a href="#" onclick="openRazorpay(event)" class="btn-main">Claim your spot — <span id="hero-price">$28</span>/year</a>
     <a href="#problem" class="btn-ghost">See why it exists ↓</a>
   </div>
 
@@ -251,8 +251,8 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       <div class="feat"><div class="chk">✓</div>Priority access to every future feature</div>
     </div>
 
-    <a href="https://buy.polar.sh/polar_cl_oLUvuDefXJNquwIq2rFiECFQiTqflYFzEeCVu0ttQdP?success_url=https%3A%2F%2Ftrytrion.com%2Fthank-you.html&cancel_url=https%3A%2F%2Ftrytrion.com%2Fpayment-failed.html" class="cta-big" data-polar-checkout data-polar-checkout-theme="dark">Become a founding member →</a>
-    <p class="guarantee">30-day money back · No questions asked · Secure via Polar</p>
+    <a href="#" onclick="openRazorpay(event)" class="cta-big">Become a founding member →</a>
+    <p class="guarantee">30-day money back · No questions asked · Secure via Razorpay</p>
   </div>
 </div>
 
@@ -363,6 +363,43 @@ async function submitWL(){
   }
 }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+// ── Razorpay — detect India vs International ──
+const _tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
+const _currency = _isIndia ? 'INR' : 'USD';
+const _amount   = _isIndia ? 249900 : 2800; // paise / cents
+const _label    = _isIndia ? '₹2,499' : '$28';
+
+// Update price labels in buttons
+document.getElementById('nav-price').textContent  = _label;
+document.getElementById('hero-price').textContent = _label;
+
+function openRazorpay(e) {
+  e.preventDefault();
+  const rzp = new Razorpay({
+    key:         'rzp_live_SegSkfGT2h4rUl',
+    amount:      _amount,
+    currency:    _currency,
+    name:        'Trion',
+    description: 'Founding Member — ' + _label + '/year',
+    image:       'https://trytrion.com/trion_favicon_32.png',
+    handler: function() {
+      window.location.href = '/thank-you.html';
+    },
+    modal: {
+      ondismiss: function() {
+        window.location.href = '/payment-failed.html';
+      }
+    },
+    theme: { color: '#7F77DD' }
+  });
+  rzp.on('payment.failed', function() {
+    window.location.href = '/payment-failed.html';
+  });
+  rzp.open();
+}
+</script>
 </body>
 </html>

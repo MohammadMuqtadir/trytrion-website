@@ -138,9 +138,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
         <p class="pay-sub">You're one step away from locking in the lowest price Trion will ever be.</p>
       </div>
       <div>
-        <button class="btn-pay" id="pay-btn" onclick="openRazorpay()">
+        <a href="https://pages.razorpay.com/trion-agents" class="btn-pay" id="pay-btn" style="text-decoration:none">
           Pay <span id="btn-price">₹2,499</span> →
-        </button>
+        </a>
         <p class="guarantee">30-day money back · No questions asked · Secure via Razorpay</p>
         <div class="trust-row">
           <div class="trust-item">🔒 256-bit SSL</div>
@@ -165,7 +165,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
   </div>
 </div>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 const pts = document.getElementById('pts');
 const colors = ['#7F77DD','#378ADD','#639922','#a89ef8'];
@@ -183,31 +182,6 @@ if (!_isIndia) {
   document.getElementById('india-pay').style.display = 'none';
   document.getElementById('intl-pay').style.display = 'flex';
   document.getElementById('total-price').textContent = '$28';
-}
-
-function openRazorpay() {
-  if (!_isIndia) return;
-  const rzp = new Razorpay({
-    key:         'rzp_live_SegSkfGT2h4rUl',
-    amount:      249900,
-    currency:    'INR',
-    name:        'Trion',
-    description: 'Founding Member — ₹2,499/year',
-    image:       'https://trytrion.com/trion_favicon_32.png',
-    handler: function() {
-      window.location.href = '/thank-you.html';
-    },
-    modal: {
-      ondismiss: function() {
-        window.location.href = '/payment-failed.html';
-      }
-    },
-    theme: { color: '#7F77DD' }
-  });
-  rzp.on('payment.failed', function() {
-    window.location.href = '/payment-failed.html';
-  });
-  rzp.open();
 }
 </script>
 </body>

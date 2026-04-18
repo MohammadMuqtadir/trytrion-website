@@ -185,28 +185,28 @@ for(let i = 0; i < 25; i++){
 <script>
 const _tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
-const _currency = _isIndia ? 'INR' : 'USD';
-const _amount   = _isIndia ? 249900 : 2800;
-const _label    = _isIndia ? '₹2,499' : '$28';
+const _label   = _isIndia ? '₹2,499' : '$28';
 
 document.getElementById('nav-price').textContent  = _label;
 document.getElementById('hero-price').textContent = _label;
 
 function openRazorpay(e) {
   e.preventDefault();
+  if (!_isIndia) {
+    window.location.href = '/#bottom-section';
+    return;
+  }
   const rzp = new Razorpay({
     key:         'rzp_live_SegSkfGT2h4rUl',
-    amount:      _amount,
-    currency:    _currency,
+    amount:      249900,
+    currency:    'INR',
     name:        'Trion',
-    description: 'Founding Member — ' + _label + '/year',
+    description: 'Founding Member — ₹2,499/year',
     image:       'https://trytrion.com/trion_favicon_32.png',
     handler: function() {
       window.location.href = '/thank-you.html';
     },
-    modal: {
-      ondismiss: function() {}
-    },
+    modal: { ondismiss: function() {} },
     theme: { color: '#7F77DD' }
   });
   rzp.on('payment.failed', function() {});

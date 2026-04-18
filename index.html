@@ -127,6 +127,16 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 .ft-links a:hover{color:var(--text2)}
 .ft-love{font-size:.75rem;color:var(--text3)}
 
+/* INTERNATIONAL NOTICE MODAL */
+.intl-overlay{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:1.5rem;background:rgba(6,6,10,0.85);backdrop-filter:blur(8px)}
+.intl-box{background:linear-gradient(145deg,rgba(127,119,221,.08),rgba(55,138,221,.03));border:0.5px solid rgba(127,119,221,.25);border-radius:20px;padding:2.5rem 2rem;max-width:440px;width:100%;text-align:center}
+.intl-ico{font-size:2rem;margin-bottom:1rem}
+.intl-box h3{font-size:1.2rem;font-weight:700;margin-bottom:.6rem}
+.intl-box p{font-size:.875rem;color:var(--text2);line-height:1.7;margin-bottom:1.5rem}
+.intl-box .btn-main{display:inline-block;margin-bottom:.75rem;animation:none}
+.intl-close{font-size:.8rem;color:var(--text3);cursor:pointer;text-decoration:underline;background:none;border:none;font-family:'Space Grotesk',sans-serif}
+.intl-close:hover{color:var(--text2)}
+
 /* MOBILE */
 @media(max-width:660px){
   h1{font-size:2rem}
@@ -259,7 +269,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 <!-- ══════════════════════════════════════
      4. WAITLIST + FOUNDER NOTE
 ══════════════════════════════════════ -->
-<div class="bottom">
+<div class="bottom" id="bottom-section">
   <div class="bottom-grid">
 
     <!-- Waitlist -->
@@ -288,6 +298,17 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- INTERNATIONAL NOTICE -->
+<div class="intl-overlay" id="intl-notice">
+  <div class="intl-box">
+    <div class="intl-ico">🌍</div>
+    <h3>International payments coming soon</h3>
+    <p>We're currently accepting payments from India only. International payments are under review and will be live very soon.<br><br>Join the free waitlist — you'll be the first to know when we open up globally.</p>
+    <a href="#" onclick="closeIntlNotice()" class="btn-main" style="animation:none">Join free waitlist ↓</a><br>
+    <button class="intl-close" onclick="document.getElementById('intl-notice').style.display='none'">Dismiss</button>
   </div>
 </div>
 
@@ -365,25 +386,26 @@ async function submitWL(){
 </script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-// ── Razorpay — detect India vs International ──
+// ── Razorpay — India only, international coming soon ──
 const _tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
-const _currency = _isIndia ? 'INR' : 'USD';
-const _amount   = _isIndia ? 249900 : 2800; // paise / cents
-const _label    = _isIndia ? '₹2,499' : '$28';
+const _label   = _isIndia ? '₹2,499' : '$28';
 
-// Update price labels in buttons
 document.getElementById('nav-price').textContent  = _label;
 document.getElementById('hero-price').textContent = _label;
 
 function openRazorpay(e) {
   e.preventDefault();
+  if (!_isIndia) {
+    document.getElementById('intl-notice').style.display = 'flex';
+    return;
+  }
   const rzp = new Razorpay({
     key:         'rzp_live_SegSkfGT2h4rUl',
-    amount:      _amount,
-    currency:    _currency,
+    amount:      249900,
+    currency:    'INR',
     name:        'Trion',
-    description: 'Founding Member — ' + _label + '/year',
+    description: 'Founding Member — ₹2,499/year',
     image:       'https://trytrion.com/trion_favicon_32.png',
     handler: function() {
       window.location.href = '/thank-you.html';
@@ -399,6 +421,11 @@ function openRazorpay(e) {
     window.location.href = '/payment-failed.html';
   });
   rzp.open();
+}
+
+function closeIntlNotice() {
+  document.getElementById('intl-notice').style.display = 'none';
+  document.getElementById('bottom-section').scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 </body>

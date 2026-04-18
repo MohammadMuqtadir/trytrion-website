@@ -334,8 +334,8 @@ setInterval(() => {
   }
 }, 5000);
 
-// ── Countdown — 60 days from page load ──
-const end = new Date(Date.now() + 60*24*60*60*1000);
+// ── Countdown — fixed to June 21 2026 ──
+const end = new Date('2026-06-21T00:00:00+05:30');
 function tick(){
   const diff = end - Date.now();
   if(diff < 0) return;

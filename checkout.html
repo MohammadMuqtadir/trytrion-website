@@ -74,6 +74,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
 .trust-row{display:flex;gap:1rem;flex-wrap:wrap}
 .trust-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--text3)}
 
+/* INTL WAITLIST INPUTS */
+.intl-inp{width:100%;background:rgba(255,255,255,.04);border:0.5px solid var(--border2);border-radius:8px;padding:.7rem .95rem;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:.7rem;display:block}
+.intl-inp:focus{border-color:var(--purple)}
+.intl-inp::placeholder{color:var(--text3)}
+
 /* MOBILE */
 @media(max-width:700px){
   .checkout-grid{grid-template-columns:1fr}
@@ -151,14 +156,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:fl
     </div>
 
     <!-- RIGHT: International coming soon -->
-    <div class="pay-card" id="intl-pay" style="display:none;text-align:center;align-items:center;justify-content:center">
+    <div class="pay-card" id="intl-pay" style="display:none">
       <div>
-        <div style="font-size:2.5rem;margin-bottom:1.25rem">🌍</div>
-        <div class="pay-label" style="text-align:center">Coming soon</div>
-        <div class="pay-title" style="margin-bottom:.75rem">International payments<br>are on their way</div>
-        <p class="pay-sub">We're currently live for India only. International support is under review and will open very soon.<br><br>Join the free waitlist — you'll be the first to know.</p>
-        <a href="/#bottom-section" class="btn-pay" style="text-decoration:none;display:block;animation:none">Join free waitlist →</a>
-        <p class="guarantee">No card needed · Get notified when we go global</p>
+        <div style="font-size:2rem;margin-bottom:1rem">🌍</div>
+        <div class="pay-label">Coming soon</div>
+        <div class="pay-title" style="margin-bottom:.5rem">International payments<br>are on their way</div>
+        <p class="pay-sub" style="margin-bottom:1.5rem">We're live for India only right now. You'll be the first to know when we open globally.</p>
+
+        <div id="intl-cta">
+          <button class="btn-pay" onclick="showIntlForm()" style="animation:none;border:none;cursor:pointer;width:100%">Join free waitlist →</button>
+          <p class="guarantee">No card needed · Get notified when it's live</p>
+        </div>
+
+        <div id="intl-form" style="display:none">
+          <input class="intl-inp" id="intl-name"    type="text"   placeholder="Your name" />
+          <input class="intl-inp" id="intl-email"   type="email"  placeholder="Email address" />
+          <input class="intl-inp" id="intl-country" type="text"   placeholder="Country" />
+          <button class="btn-pay" onclick="submitIntlWL()" style="animation:none;border:none;cursor:pointer;width:100%">Notify me →</button>
+          <p class="guarantee">No spam · Unsubscribe anytime</p>
+        </div>
+
+        <div id="intl-success" style="display:none;text-align:center;padding:1rem 0">
+          <div style="font-size:1.8rem;margin-bottom:.6rem">✅</div>
+          <div style="font-size:1rem;font-weight:600;margin-bottom:.35rem">You're on the list.</div>
+          <p style="font-size:.85rem;color:var(--text2)">We'll email you the moment international payments go live.</p>
+        </div>
       </div>
     </div>
 
@@ -180,8 +202,33 @@ const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
 
 if (!_isIndia) {
   document.getElementById('india-pay').style.display = 'none';
-  document.getElementById('intl-pay').style.display = 'flex';
+  document.getElementById('intl-pay').style.display = 'block';
   document.getElementById('total-price').textContent = '$28';
+}
+
+function showIntlForm() {
+  document.getElementById('intl-cta').style.display = 'none';
+  document.getElementById('intl-form').style.display = 'block';
+  document.getElementById('intl-name').focus();
+}
+
+async function submitIntlWL() {
+  const name    = document.getElementById('intl-name').value.trim();
+  const email   = document.getElementById('intl-email').value.trim();
+  const country = document.getElementById('intl-country').value.trim();
+  if (!name || !email) { alert('Please enter your name and email.'); return; }
+  try {
+    await fetch('https://script.google.com/macros/s/AKfycbx-nr3zdwovQz61HffNCM6CxW2ZmzovwGJpV2UaWwGC-JmEFjkzmqo5UStcFCsHdCT4/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, country })
+    });
+    document.getElementById('intl-form').style.display = 'none';
+    document.getElementById('intl-success').style.display = 'block';
+  } catch(e) {
+    alert('Something went wrong. Please try again.');
+  }
 }
 </script>
 </body>

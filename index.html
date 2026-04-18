@@ -178,7 +178,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
     <a href="#problem" class="btn-ghost">See why it exists ↓</a>
   </div>
   <div class="proof">
-    <div class="proof-item"><div class="proof-num" id="hero-count">1,128</div><div class="proof-lbl">Spots claimed</div></div>
+    <div class="proof-item"><div class="proof-num" id="hero-count">0</div><div class="proof-lbl">Spots claimed</div></div>
     <div class="proof-item"><div class="proof-num">$28</div><div class="proof-lbl">One-time price</div></div>
     <div class="proof-item"><div class="proof-num">3</div><div class="proof-lbl">AI models</div></div>
   </div>
@@ -208,10 +208,10 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
     <div class="price-per">per year · one-time · founding member</div>
     <div class="saving">You save $171 · 86% off · locked forever</div>
     <div class="spots-row">
-      <span><span class="live-dot"></span><span id="spots-claimed">1,128</span> spots claimed</span>
+      <span><span class="live-dot"></span><span id="spots-claimed">0</span> spots claimed</span>
       <span>5,000 total</span>
     </div>
-    <div class="bar"><div class="bar-fill" id="bar-fill" style="width:22.56%"></div></div>
+    <div class="bar"><div class="bar-fill" id="bar-fill" style="width:0%"></div></div>
     <div class="feats">
       <div class="feat"><div class="chk">✓</div>All 3 agents — Strategy, Sales, Marketing</div>
       <div class="feat"><div class="chk">✓</div>APEX CORE orchestration engine</div>
@@ -220,7 +220,8 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       <div class="feat"><div class="chk">✓</div>Founding member pricing — locked for life</div>
       <div class="feat"><div class="chk">✓</div>Priority access to every future feature</div>
     </div>
-    <a href="https://razorpay.me/@trytrion" class="cta-big" onclick="handlePayClick(event)">Become a founding member →</a>
+    <button onclick="openPayment()" class="cta-big">Become a founding member →</button>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:.6rem;text-align:center">Paying in India? ₹2,350 · UPI, Cards, Net Banking accepted</p>
   </div>
 </div>
 
@@ -259,7 +260,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 <script>
 const SUPA_URL = 'https://uimjlhfeqtjbcelovokn.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpbWpsaGZlcXRqYmNlbG92b2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxODc4NDUsImV4cCI6MjA5MTc2Mzg0NX0.Xrli1mKTeWkNPMdNaKOz6rVeX1ffxV6F33qCi_YVhZU';
-const BASELINE = 1128;
+const BASELINE = 0;
 const TOTAL = 5000;
 const hdrs = { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` };
 
@@ -341,16 +342,18 @@ async function submitWL() {
   btn.textContent='Join free waitlist'; btn.disabled=false;
 }
 
+// ── Payment handler ──
+function openPayment() {
+  window.open('https://rzp.io/rzp/trion-membership-2026', '_blank');
+}
+
 (async()=>{
   const params=new URLSearchParams(window.location.search);
   if (params.get('paid')==='true') {
-    // Save paid status permanently in localStorage
     localStorage.setItem('trion_is_paid', 'true');
-    // Clean URL without reloading
     window.history.replaceState({}, '', '/');
     showTY(); return;
   }
-  // Check if already paid from previous visit
   if (localStorage.getItem('trion_is_paid') === 'true') {
     showTY(); return;
   }
@@ -358,13 +361,6 @@ async function submitWL() {
   setInterval(fetchCount,30000);
 })();
 
-// When user clicks pay — store intent, Razorpay redirects back to ?paid=true
-function handlePayClick(e) {
-  // Razorpay.me doesn't support custom return URLs on basic links
-  // So we open it and rely on ?paid=true param when they return
-  // For now just let the link open normally
-  return true;
-}
 </script>
 </body>
 </html>

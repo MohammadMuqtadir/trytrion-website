@@ -154,7 +154,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
 <!-- NAV -->
 <nav>
   <div class="nav-logo">TRION</div>
-  <a href="#" onclick="openRazorpay(event)" class="nav-btn">Get early access — <span id="nav-price">$28</span></a>
+  <a href="/checkout.html" class="nav-btn">Get early access — ₹2,499</a>
 </nav>
 
 <!-- Particles -->
@@ -183,7 +183,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
   </p>
 
   <div class="ctas">
-    <a href="#" onclick="openRazorpay(event)" class="btn-main">Claim your spot — <span id="hero-price">$28</span>/year</a>
+    <a href="/checkout.html" class="btn-main">Claim your spot — ₹2,499/year</a>
     <a href="#problem" class="btn-ghost">See why it exists ↓</a>
   </div>
 
@@ -261,7 +261,7 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       <div class="feat"><div class="chk">✓</div>Priority access to every future feature</div>
     </div>
 
-    <a href="#" onclick="openRazorpay(event)" class="cta-big">Become a founding member →</a>
+    <a href="/checkout.html" class="cta-big">Become a founding member →</a>
     <p class="guarantee">30-day money back · No questions asked · Secure via Razorpay</p>
   </div>
 </div>
@@ -298,17 +298,6 @@ footer{border-top:0.5px solid var(--border);padding:2rem;text-align:center;max-w
       </div>
     </div>
 
-  </div>
-</div>
-
-<!-- INTERNATIONAL NOTICE -->
-<div class="intl-overlay" id="intl-notice">
-  <div class="intl-box">
-    <div class="intl-ico">🌍</div>
-    <h3>International payments coming soon</h3>
-    <p>We're currently accepting payments from India only. International payments are under review and will be live very soon.<br><br>Join the free waitlist — you'll be the first to know when we open up globally.</p>
-    <a href="#" onclick="closeIntlNotice()" class="btn-main" style="animation:none">Join free waitlist ↓</a><br>
-    <button class="intl-close" onclick="document.getElementById('intl-notice').style.display='none'">Dismiss</button>
   </div>
 </div>
 
@@ -382,50 +371,6 @@ async function submitWL(){
   } catch(e) {
     alert('Something went wrong. Please try again.');
   }
-}
-</script>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-// ── Razorpay — India only, international coming soon ──
-const _tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
-const _label   = _isIndia ? '₹2,499' : '$28';
-
-document.getElementById('nav-price').textContent  = _label;
-document.getElementById('hero-price').textContent = _label;
-
-function openRazorpay(e) {
-  e.preventDefault();
-  if (!_isIndia) {
-    document.getElementById('intl-notice').style.display = 'flex';
-    return;
-  }
-  const rzp = new Razorpay({
-    key:         'rzp_live_SegSkfGT2h4rUl',
-    amount:      249900,
-    currency:    'INR',
-    name:        'Trion',
-    description: 'Founding Member — ₹2,499/year',
-    image:       'https://trytrion.com/trion_favicon_32.png',
-    handler: function() {
-      window.location.href = '/thank-you.html';
-    },
-    modal: {
-      ondismiss: function() {
-        window.location.href = '/payment-failed.html';
-      }
-    },
-    theme: { color: '#7F77DD' }
-  });
-  rzp.on('payment.failed', function() {
-    window.location.href = '/payment-failed.html';
-  });
-  rzp.open();
-}
-
-function closeIntlNotice() {
-  document.getElementById('intl-notice').style.display = 'none';
-  document.getElementById('bottom-section').scrollIntoView({ behavior: 'smooth' });
 }
 </script>
 </body>

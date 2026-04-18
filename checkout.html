@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Trion Founding Member</title>
+<meta name="description" content="Complete your Trion founding member purchase.">
+<link rel="icon" type="image/png" href="trion_favicon_32.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple:#7F77DD;
+  --bg:#06060a;
+  --text:#f0f0f8;
+  --text2:#8080a8;
+  --text3:#404068;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(6,6,10,0.88);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border)}
+.nav-logo{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;background:linear-gradient(135deg,#c4beff,#7F77DD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-back{font-size:.85rem;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--text)}
+
+/* PARTICLES */
+.pts{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.pt{position:absolute;width:1.5px;height:1.5px;border-radius:50%;opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{opacity:0;transform:translateY(100vh)}15%{opacity:.7}85%{opacity:.2}100%{opacity:0;transform:translateY(-5vh)}}
+
+/* HERO GLOW */
+.hero-glow{position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(127,119,221,0.1) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+/* MAIN */
+.main{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:7rem 1.5rem 4rem;position:relative;z-index:1}
+
+/* CHECKOUT GRID */
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:860px;width:100%}
+
+/* ORDER SUMMARY */
+.summary-card{background:rgba(255,255,255,.02);border:0.5px solid var(--border);border-radius:20px;padding:2rem}
+.summary-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);font-weight:500;margin-bottom:1.25rem}
+.product-row{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:0.5px solid var(--border)}
+.product-icon{width:48px;height:48px;border-radius:12px;background:rgba(127,119,221,.1);border:0.5px solid rgba(127,119,221,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.product-name{font-size:1rem;font-weight:600;margin-bottom:.2rem}
+.product-desc{font-size:.8rem;color:var(--text2)}
+.price-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
+.price-row span{font-size:.85rem;color:var(--text2)}
+.price-row strong{font-size:.85rem;color:var(--text)}
+.price-total{display:flex;justify-content:space-between;align-items:center;padding-top:.75rem;border-top:0.5px solid var(--border);margin-top:.75rem}
+.price-total span{font-size:.9rem;font-weight:600}
+.price-total strong{font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#e0ddff,#a89ef8,#7F77DD);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.saving-tag{display:inline-block;background:rgba(99,153,34,.12);color:#7cb83a;border:0.5px solid rgba(99,153,34,.25);padding:.2rem .75rem;border-radius:100px;font-size:.75rem;font-weight:500;margin-top:.6rem}
+.feats{display:flex;flex-direction:column;gap:.5rem;margin-top:1.5rem}
+.feat{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--text2)}
+.chk{width:16px;height:16px;border-radius:50%;background:rgba(99,153,34,.12);border:0.5px solid rgba(99,153,34,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.55rem;color:#7cb83a}
+
+/* PAYMENT CARD */
+.pay-card{background:linear-gradient(145deg,rgba(127,119,221,.07),rgba(55,138,221,.03));border:0.5px solid rgba(127,119,221,.22);border-radius:20px;padding:2rem;display:flex;flex-direction:column;justify-content:space-between}
+.pay-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);font-weight:500;margin-bottom:1.25rem}
+.pay-title{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.4rem}
+.pay-sub{font-size:.85rem;color:var(--text2);margin-bottom:2rem;line-height:1.6}
+.intl-notice{background:rgba(127,119,221,.06);border:0.5px solid rgba(127,119,221,.15);border-radius:12px;padding:1rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--text2);line-height:1.6;display:none}
+.intl-notice strong{color:var(--text);display:block;margin-bottom:.25rem}
+.btn-pay{display:block;width:100%;background:linear-gradient(135deg,#7F77DD,#534AB7);color:#fff;padding:1rem 2rem;border-radius:12px;font-size:1rem;font-weight:700;text-align:center;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:transform .2s,opacity .2s;animation:pulse-cta 3s infinite;margin-bottom:1rem}
+@keyframes pulse-cta{0%,100%{box-shadow:0 0 0 0 rgba(127,119,221,.35)}55%{box-shadow:0 0 0 12px rgba(127,119,221,0)}}
+.btn-pay:hover{transform:translateY(-2px);opacity:.9}
+.btn-pay:disabled{opacity:.5;cursor:not-allowed;animation:none;transform:none}
+.guarantee{font-size:.75rem;color:var(--text3);text-align:center;margin-bottom:1.5rem}
+.trust-row{display:flex;gap:1rem;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--text3)}
+
+/* MOBILE */
+@media(max-width:700px){
+  .checkout-grid{grid-template-columns:1fr}
+  .main{padding:6rem 1rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">TRION</div>
+  <a href="/" class="nav-back">← Back</a>
+</nav>
+
+<div class="pts" id="pts"></div>
+<div class="hero-glow"></div>
+
+<div class="main">
+  <div class="checkout-grid">
+
+    <!-- LEFT: Order Summary -->
+    <div class="summary-card">
+      <div class="summary-label">Order summary</div>
+
+      <div class="product-row">
+        <div class="product-icon">⚡</div>
+        <div>
+          <div class="product-name">Trion — Founding Member</div>
+          <div class="product-desc">Annual plan · Locked for life</div>
+        </div>
+      </div>
+
+      <div class="price-row">
+        <span>Regular price</span>
+        <strong style="text-decoration:line-through;color:var(--text3)">$199/year</strong>
+      </div>
+      <div class="price-row">
+        <span>Founding member discount</span>
+        <strong style="color:#7cb83a">−86%</strong>
+      </div>
+      <div class="price-total">
+        <span>Total today</span>
+        <strong id="total-price">₹2,499</strong>
+      </div>
+      <div class="saving-tag">You save $171 · locked forever</div>
+
+      <div class="feats">
+        <div class="feat"><div class="chk">✓</div>All 3 agents — Strategy, Sales, Marketing</div>
+        <div class="feat"><div class="chk">✓</div>APEX CORE orchestration engine</div>
+        <div class="feat"><div class="chk">✓</div>Automated lead generation on launch</div>
+        <div class="feat"><div class="chk">✓</div>Full marketing campaign automation</div>
+        <div class="feat"><div class="chk">✓</div>Founding member pricing — locked for life</div>
+        <div class="feat"><div class="chk">✓</div>Priority access to every future feature</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Payment (India) -->
+    <div class="pay-card" id="india-pay">
+      <div>
+        <div class="pay-label">Payment</div>
+        <div class="pay-title">Complete your purchase</div>
+        <p class="pay-sub">You're one step away from locking in the lowest price Trion will ever be.</p>
+      </div>
+      <div>
+        <button class="btn-pay" id="pay-btn" onclick="openRazorpay()">
+          Pay <span id="btn-price">₹2,499</span> →
+        </button>
+        <p class="guarantee">30-day money back · No questions asked · Secure via Razorpay</p>
+        <div class="trust-row">
+          <div class="trust-item">🔒 256-bit SSL</div>
+          <div class="trust-item">🇮🇳 Made in India</div>
+          <div class="trust-item">✦ Cancel anytime</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: International coming soon -->
+    <div class="pay-card" id="intl-pay" style="display:none;text-align:center;align-items:center;justify-content:center">
+      <div>
+        <div style="font-size:2.5rem;margin-bottom:1.25rem">🌍</div>
+        <div class="pay-label" style="text-align:center">Coming soon</div>
+        <div class="pay-title" style="margin-bottom:.75rem">International payments<br>are on their way</div>
+        <p class="pay-sub">We're currently live for India only. International support is under review and will open very soon.<br><br>Join the free waitlist — you'll be the first to know.</p>
+        <a href="/#bottom-section" class="btn-pay" style="text-decoration:none;display:block;animation:none">Join free waitlist →</a>
+        <p class="guarantee">No card needed · Get notified when we go global</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+const pts = document.getElementById('pts');
+const colors = ['#7F77DD','#378ADD','#639922','#a89ef8'];
+for(let i = 0; i < 25; i++){
+  const p = document.createElement('div');
+  p.className = 'pt';
+  p.style.cssText = `left:${Math.random()*100}%;animation-duration:${9+Math.random()*14}s;animation-delay:${Math.random()*12}s;background:${colors[Math.floor(Math.random()*colors.length)]}`;
+  pts.appendChild(p);
+}
+
+const _tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const _isIndia = _tz === 'Asia/Calcutta' || _tz === 'Asia/Kolkata';
+
+if (!_isIndia) {
+  document.getElementById('india-pay').style.display = 'none';
+  document.getElementById('intl-pay').style.display = 'flex';
+  document.getElementById('total-price').textContent = '$28';
+}
+
+function openRazorpay() {
+  if (!_isIndia) return;
+  const rzp = new Razorpay({
+    key:         'rzp_live_SegSkfGT2h4rUl',
+    amount:      249900,
+    currency:    'INR',
+    name:        'Trion',
+    description: 'Founding Member — ₹2,499/year',
+    image:       'https://trytrion.com/trion_favicon_32.png',
+    handler: function() {
+      window.location.href = '/thank-you.html';
+    },
+    modal: {
+      ondismiss: function() {
+        window.location.href = '/payment-failed.html';
+      }
+    },
+    theme: { color: '#7F77DD' }
+  });
+  rzp.on('payment.failed', function() {
+    window.location.href = '/payment-failed.html';
+  });
+  rzp.open();
+}
+</script>
+</body>
+</html>
